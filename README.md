@@ -12,17 +12,24 @@ It provides the following features:
 ## Setup 
 
 ```shell
-$ git clone <repo>
-$ cd <repo>
+$ git clone https://gitlab.com/lupl/gndentr
+$ cd gndentr
 $ pip install -r requirements.txt
 ```
 ## Basic Usage
 
 ### CLI
 
-For example
+With argument(s), predicates from JSON:
 
 ```shell
+$ python gndentr-cli.py "Ludwig Wittgenstein" -p ./tests/test_data/predicates.json
+```
+
+With argument(s) + TEI/XML-File, predicates from text file:
+
+```shell
+python gndentr-cli.py "Ludwig Wittgenstein" --file ./tests/test_data/minimal_tei.xml -x "//rs[@type='person']/text()" -p ./tests/test_data/predicates
 ```
 
 ### Python
