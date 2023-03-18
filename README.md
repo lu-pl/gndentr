@@ -28,7 +28,7 @@ GND EntR provides a general `GNDEntityResolver` class and also a small Command L
 Parameters:
 
 * **entities**: For each element in `entities` a request is sent to the GND API matching against 'variantName' (API query strings can be controlled by overriding `GNDEntityResolver._get_gnd_json` and providing an appropriate `params` parameter).
-* **predicates**: Predicates of the GND result set(s) are only transferred to the graph if present in the predicates argument.
+* **predicates**: Predicates of the GND result set(s) are only transferred to the graph if present in the `predicates` argument.
 * **limit**: Allows to control the maximum number of query result set members *per result set* that get transferred to the graph.
 
 ```python
