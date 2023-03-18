@@ -1,6 +1,6 @@
 # GND EntR
 
-GND Entity Resolver - A small utility for resolving named entities against GND and serializing graph data from the result sets.
+GND Entity Resolver - A small utility for resolving named entities against the [GND API](https://lobid.org/gnd/api) and serializing graph data from the result sets.
 
 It provides the following features:
 
@@ -30,23 +30,36 @@ pip install -r requirements.txt
 
 Run `python gndentr-cli.py --help` to see CLI options.
 
-#### Examples
+##### CLI Examples
 
-With argument(s), predicates from JSON:
+With single argument, predicates from JSON:
 
 ```shell
 python gndentr-cli.py "Ludwig Wittgenstein" -p ./tests/test_data/predicates.json
 ```
 
-With argument(s) + TEI/XML-File, predicates from text file:
+With multiple arguments, predicates from JSON:
+
+```shell
+python gndentr-cli.py "Ludwig Wittgenstein" "Rudolf Carnap" -p ./tests/test_data/predicates.json
+```
+
+With entity extraction from an TEI/XML-File using xpath pattern; predicates from text file:
+
+```shell
+python gndentr-cli.py --file ./tests/test_data/minimal_tei.xml -x "//rs[@type='person']/text()" -p ./tests/test_data/predicates
+```
+
+With argument + TEI/XML-File; entities from arguments and TEI/XML-File are merged ; predicates from text file:
 
 ```shell
 python gndentr-cli.py "Ludwig Wittgenstein" --file ./tests/test_data/minimal_tei.xml -x "//rs[@type='person']/text()" -p ./tests/test_data/predicates
 ```
 
+
 ### Python
 
-#### Examples
+##### Python Examples
 
 ```python
 ```
