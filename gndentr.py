@@ -37,6 +37,8 @@ class GNDEntityResolver:
         default params search for 'variantName' and filter by 'type:Person'.
         """
 
+        # print(f"Requesting entity: '{entity}'")
+
         params = params or {
             "q": f"variantName: {entity}",
             "filter": "type:Person"
