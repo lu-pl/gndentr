@@ -19,15 +19,15 @@ pip install -r requirements.txt
 ```
 ## Usage
 
-GND EntR provides a general GNDEntityResolver class and also a small Command Line Interface.
+GND EntR provides a general `GNDEntityResolver` class and also a small Command Line Interface.
 
 ### GNDEntityResolver 
 
-GNDEntityResolver resolves named entities (e.g. person names) against the GND API and constructs an rdflib.Graph instance based on the GND result set(s) fetched from the API call.
+`GNDEntityResolver` resolves named entities (e.g. person names) against the GND API and constructs an [rdflib.Graph](https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html#rdflib.graph.Graph) instance based on the GND result set(s) fetched from the API.
 
 Parameters:
 
-* **entities**: For each element in entities a request is sent to the GND API matching against 'variantName' (API query strings can be controlled by overriding `GNDEntityResolver._get_gnd_json` and providing an appropriate `params` parameter).
+* **entities**: For each element in `entities` a request is sent to the GND API matching against 'variantName' (API query strings can be controlled by overriding `GNDEntityResolver._get_gnd_json` and providing an appropriate `params` parameter).
 * **predicates**: Predicates of the GND result set(s) are only transferred to the graph if present in the predicates argument.
 * **limit**: Allows to control the maximum number of query result set members *per result set* that get transferred to the graph.
 
