@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rnc" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<TEI version="3.3.0" xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+	<fileDesc>
+	    <titleStmt>
+		<title>The shortest TEI Document Imaginable</title>
+	    </titleStmt>
+	    <publicationStmt>
+		<p>First published as part of TEI P2, this is the P5
+		version using a name space.</p>
+	    </publicationStmt>
+	    <sourceDesc>
+		<p>No source: this is an original work.</p>
+	    </sourceDesc>
+	</fileDesc>
+    </teiHeader>
+    <text>
+	<body>
+	    <p>This is about the shortest TEI document imaginable.</p>
+	    <rs type="person">Roland Barthes</rs>
+	    <rs type="person">bell hooks</rs>
+	    <rs type="person">John Coltrane</rs>
+	</body>
+    </text>
+</TEI>
