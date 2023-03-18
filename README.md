@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 Run `python gndentr-cli.py --help` to see CLI options.
 
-##### CLI Examples
+#### CLI Examples
 
 With single argument, predicates from JSON:
 
@@ -59,7 +59,7 @@ python gndentr-cli.py "Ludwig Wittgenstein" --file ./tests/test_data/minimal_tei
 
 ### Python
 
-##### Python Examples
+#### Python Examples
 
 ```python
 ```
