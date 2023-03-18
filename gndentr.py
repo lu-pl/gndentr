@@ -116,20 +116,3 @@ class GNDEntityResolver:
             self.to_graph()
 
         return self._graph.serialize(*args, **kwargs)
-
-
-if __name__ == "__main__":
-
-    persons = get_person_names("some_file.xml")
-
-    predicates = [
-        "id",
-        "gndIdentifier",
-        "variantNames",
-        "dateOfDeath",
-        "placeOfDeath",
-        "dateOfBirth",
-        "dateOfDeath"
-    ]
-
-    graph = GNDEntityResolver(*persons, predicates=predicates).to_graph()

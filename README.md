@@ -1,13 +1,6 @@
 # GND EntR
 
-GND Entity Resolver - A small utility for resolving named entities against the [GND API](https://lobid.org/gnd/api) and serializing graph data from the result sets.
-
-It provides the following features:
-
-* gndentr.GNDEntityresolver: ...
-* gndentr-cli: A CLI ...
-
-See examples below.
+GND Entity Resolver - Basic functionality for resolving named entities against the [GND API](https://lobid.org/gnd/api) and serializing graph data from the result sets.
 
 > This project is in an early stage of development and should be used with caution
 
@@ -24,9 +17,45 @@ git clone https://gitlab.com/lupl/gndentr
 cd gndentr
 pip install -r requirements.txt
 ```
-## Basic Usage
+## Usage
+
+GND EntR provides a general GNDEntityResolver class and also a small Command Line Interface.
+
+### GNDEntityResolver Example
+
+GNDEntityResolver resolves named entities (e.g. person names) against the GND API and constructs an rdflib.Graph instance based on the GND result set(s).
+
+Parameters:
+
+* entities: For each element in entities a request is sent to the GND API matching against 'variantName' (API query strings can be controlled by overriding `GNDEntityResolver._get_gnd_json` and providing an appropriate `params` parameter).
+* predicates: Predicates of the GND result set(s) are only transferred to the graph if present in the predicates argument.
+* limit: allows to control the maximum number of query result set members *per result set* that get transferred to the graph.
+
+```python
+from gndentr import GNDEntityResolver
+
+entities = ["Ludwig Wittgenstein", "Rudolf Carnap"]
+
+predicates = [
+    "id",
+    "gndIdentifier",
+    "variantNames",
+    "dateOfDeath",
+    "placeOfDeath",
+    "dateOfBirth",
+    "dateOfDeath"
+]
+
+graph = GNDEntityResolver(*entities, predicates=predicates)
+
+print(graph.serialize(format="ttl"))
+```
 
 ### CLI
+
+A small CLI that utilizes GNDEntityResolver.
+
+E.g. allows read entities from an XML file according to some XPath pattern.
 
 Run `python gndentr-cli.py --help` to see CLI options.
 
@@ -55,15 +84,6 @@ With argument + TEI/XML-File; entities from arguments and TEI/XML-File are merge
 ```shell
 python gndentr-cli.py "Ludwig Wittgenstein" --file ./tests/test_data/minimal_tei.xml -x "//rs[@type='person']/text()" -p ./tests/test_data/predicates
 ```
-
-
-### Python
-
-#### Python Examples
-
-```python
-```
-
 
 ## Contribution
 
