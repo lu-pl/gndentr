@@ -10,7 +10,7 @@ from helpers.filters import predicate_filter, entity_filter
 from lxml import etree
 
 
-def xml_extractor(file: str | os.PathLike, xpath_pattern: str) -> map[str]:
+def xml_extractor(file: str | os.PathLike, xpath_pattern: str):
     """Loads an XML file and runs xpath_pattern against it.
     Matches results get str casted, so theXPath expression should match text nodes.
     """
@@ -24,6 +24,8 @@ def xml_extractor(file: str | os.PathLike, xpath_pattern: str) -> map[str]:
 
 
 def entity_extractor(file: str | os.PathLike, xpath_pattern: str):
+    """Extracts entities according to xpath_pattern and applies entity_filter.
+    """
 
     _entities = xml_extractor(file, xpath_pattern)
 
@@ -31,6 +33,8 @@ def entity_extractor(file: str | os.PathLike, xpath_pattern: str):
 
 
 def persons_extractor(file: str | os.PathLike):
+    """ Extracts person entities according to //rs[@type='person']/text().
+    """
 
     xpath_pattern = "//rs[@type='person']/text()"
 
@@ -38,6 +42,8 @@ def persons_extractor(file: str | os.PathLike):
 
 
 def predicates_extractor(file: str | os.PathLike, _switch: dict[str, Callable] = None) -> Iterable[str]:
+    """
+    """
 
     with open(file) as f:
 
@@ -55,18 +61,3 @@ def predicates_extractor(file: str | os.PathLike, _switch: dict[str, Callable] =
         predicates = get_predicates(f)
 
     return predicates
-
-
-##################################################
-# [passes] test predicates-extractor
-# print(predicates_extractor("../tests/test_data/predicates"))
-# print()
-# print(predicates_extractor("../tests/test_data/predicates.json"))
-
-# [passes] test persons_extractor
-# print(persons_extractor("../tests/test_data/corpus_full_dedup.xml"))
-
-# [passes] test xml_extractor
-# print(xml_extractor("../tests/test_data/corpus_full_dedup.xml", "//rs[@type='person']"))
-
-# print(persons_extractor("../tests/test_data/corpus_full_dedup.xml"))
