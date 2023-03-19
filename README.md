@@ -10,7 +10,7 @@ GND Entity Resolver - Basic functionality for resolving named entities against t
 
 ## Setup 
 
-Activate a virtual environment and run the following shell commands:
+Activate a virtual environment (python >= 3.10) and run the following shell commands:
 
 ```shell
 git clone https://gitlab.com/lupl/gndentr
