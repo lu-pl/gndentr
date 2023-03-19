@@ -21,6 +21,8 @@ pip install -r requirements.txt
 
 GND EntR provides a general `GNDEntityResolver` class and also a small Command Line Interface.
 
+> For a quick overview checkout the CLI Examples below.
+
 ### GNDEntityResolver 
 
 `GNDEntityResolver` resolves named entities (e.g. person names) against the GND API and constructs an [rdflib.Graph](https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html#rdflib.graph.Graph) instance based on the GND result set(s) fetched from the API.
