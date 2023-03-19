@@ -10,15 +10,9 @@ from lxml import etree
 
 class GNDEntityResolver:
     """Resolves named entities (e.g. person names) against the GND API and 
-    constructs an rdflib.Graph instance based on the GND result set(s).
+    constructs an rdflib.Graph instance based on the GND result sets.
 
-    Parameters:
-
-    - predicates
-    ~Allows to specify the predicates that should be transferred to the graph.
-    ~i.e. predicates of the result are only transferred to the graph if in predicates.
-
-    - limit
+    For basic usage and parameters see https://gitlab.com/lupl/gndentr/-/tree/main/#usage.
     """
 
     def __init__(self,
@@ -32,16 +26,16 @@ class GNDEntityResolver:
 
         self._graph = rdflib.Graph()
 
-    def _get_gnd_json(self, entity: str, params: dict = None) -> dict:
-        """Gets json data for entity from the GND API;
-        default params search for 'variantName' and filter by 'type:Person'.
+    def _get_gnd_json(self, entity: str, params: dict = None) -> dict:  # remove?
+        """Gets JSON data for entity from the GND API;
+        default params search for 'variantName'.
         """
 
         # print(f"Requesting entity: '{entity}'")
 
         params = params or {
             "q": f"variantName: {entity}",
-            "filter": "type:Person"
+            # "filter": "type:Person"
         }
 
         response = requests.get("https://lobid.org/gnd/search", params=params)
@@ -52,14 +46,15 @@ class GNDEntityResolver:
                         input_json: dict,
                         predicates: Container = None,
                         limit: int = None) -> dict:
-        """Constructs json-ld from a gnd result set (input_json);
+        """Constructs JSON-LD from a GND result set (input_json).
 
-        Output json-ld is comprised of:
+        Output JSON-LD is comprised of:
+
         - basic metadata about the gnd query
         - json data for every 'member' of the gnd set
 
-        Member data gets filtered according to predicates
-        ... []
+        For predicates and limit parameters see class documenation.
+
         """
 
         predicates = predicates or self._predicates
@@ -88,6 +83,10 @@ class GNDEntityResolver:
         return output_json
 
     def _construct_graph(self) -> rdflib.Graph:
+        """Fetches JSON data from the API,
+        applies predicates contraint if applicable,
+        and parses JSON-LD data into an rdflib.Graph instance.
+        """
 
         graph = rdflib.Graph()
 
@@ -96,17 +95,24 @@ class GNDEntityResolver:
             # get json data
             json_ld = self._get_gnd_json(entity)
 
+            # apply predicates constraints
             if self._predicates:
                 json_ld = self._construct_json(json_ld)
 
+            # merge graph
             graph.parse(data=json_ld, format="json-ld")
 
         return graph
 
     def to_graph(self):
+        """
+        Getter for graph representation.
+        """
+
         self._graph = self._construct_graph()
         return self._graph
 
+    # could this imply that GNDEntityResolver /is/ an rdflib.Graph?
     def serialize(self, *args, **kwargs):
         """Proxy for rdflib.Graph.serialize;
         delegates serialization to the rdflib.Graph instance;
@@ -116,3 +122,15 @@ class GNDEntityResolver:
             self.to_graph()
 
         return self._graph.serialize(*args, **kwargs)
+
+
+class GNDPersonResolver(GNDEntityResolver):
+
+    def _get_gnd_json(self, entity: str, params: dict = None) -> dict:
+
+        person_params = {
+            "q": f"variantName: {entity}",
+            "filter": "type:Person"
+        }
+
+        return super()._get_gnd_json(entity, person_params)
