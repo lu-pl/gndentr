@@ -10,7 +10,10 @@ from helpers.filters import predicate_filter, entity_filter
 from lxml import etree
 
 
-def xml_extractor(file: str | os.PathLike, xpath_pattern: str):
+def xml_extractor(file: str | os.PathLike, xpath_pattern: str) -> map[str]:
+    """Loads an XML file and runs xpath_pattern against it.
+    Matches results get str casted, so theXPath expression should match text nodes.
+    """
 
     parser = etree.HTMLParser()  # other solution with xpath namespaces?
     tree = etree.parse(file, parser)
