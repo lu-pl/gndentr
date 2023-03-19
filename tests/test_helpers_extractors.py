@@ -1,22 +1,24 @@
-from helpers.extractors import (
-    xml_extractor,
-    entity_extractor,
-    persons_extractor,
-    predicats_extractor
-)
+##################################################
+# TODO
+##################################################
 
+# from gndentr.helpers.extractors import (
+#     xml_extractor,
+#     entity_extractor,
+#     persons_extractor,
+#     predicates_extractor
+# )
 
-def test_xml_extractor():
-    ...
+# test ideas:
+# [passes] test predicates-extractor
+# print(predicates_extractor("../tests/test_data/predicates"))
+# print()
+# print(predicates_extractor("../tests/test_data/predicates.json"))
 
+# [passes] test persons_extractor
+# print(persons_extractor("../tests/test_data/corpus_full_dedup.xml"))
 
-def test_entity_extractor():
-    ...
+# [passes] test xml_extractor
+# print(xml_extractor("../tests/test_data/corpus_full_dedup.xml", "//rs[@type='person']"))
 
-
-def test_persons_extractor():
-    ...
-
-
-def test_predicats_extractor():
-    ...
+# print(persons_extractor("../tests/test_data/corpus_full_dedup.xml"))
