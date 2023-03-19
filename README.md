@@ -29,7 +29,7 @@ GND EntR provides a general `GNDEntityResolver` class and also a small Command L
 
 Parameters:
 
-* **entities**: For each element in `entities` a request is sent to the GND API matching against 'variantName' (API query strings can be controlled by overriding `GNDEntityResolver._get_gnd_json` and providing an appropriate `params` parameter).
+* **entities**: For each element in `entities` a request is sent to the GND API matching against 'variantName' (for control over this behavior see the `GNDPersonResolver` example below).
 * **predicates**: Predicates of the GND result sets are only transferred to the graph if present in the `predicates` argument.
 * **limit**: Allows to control the maximum number of query result set members *per result set* that get transferred to the graph.
 
@@ -52,6 +52,25 @@ graph = GNDEntityResolver(*entities, predicates=predicates)
 
 print(graph.serialize(format="ttl"))
 ```
+
+As mentioned, requests are sent to the GND API matching against 'variantName' by default.
+This behavior is easily customizable, since API query strings can be controlled by overriding `GNDEntityResolver._get_gnd_json` and providing an appropriate `params` parameter.
+
+E.g. `GNDPersonResolver` is implemented like so:
+
+```python
+class GNDPersonResolver(GNDEntityResolver):
+
+    def _get_gnd_json(self, entity: str, params: dict = None) -> dict:
+
+        person_params = {
+            "q": f"variantName: {entity}",
+            "filter": "type:Person"
+        }
+
+        return super()._get_gnd_json(entity, person_params)
+```
+
 
 ### CLI
 
