@@ -75,7 +75,7 @@ With multiple arguments, predicates from JSON:
 python gndentr-cli.py "Ludwig Wittgenstein" "Rudolf Carnap" -p ./tests/test_data/predicates.json
 ```
 
-With entity extraction from an TEI/XML-File using xpath pattern; predicates from text file:
+With entity extraction from a TEI/XML-File using xpath pattern; predicates from text file:
 
 ```shell
 python gndentr-cli.py --file ./tests/test_data/minimal_tei.xml -x "//rs[@type='person']/text()" -p ./tests/test_data/predicates
