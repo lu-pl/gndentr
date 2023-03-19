@@ -25,12 +25,12 @@ GND EntR provides a general `GNDEntityResolver` class and also a small Command L
 
 ### GNDEntityResolver 
 
-`GNDEntityResolver` resolves named entities (e.g. person names) against the GND API and constructs an [rdflib.Graph](https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html#rdflib.graph.Graph) instance based on the GND result set(s) fetched from the API.
+`GNDEntityResolver` resolves named entities (e.g. person names) against the GND API and constructs an [rdflib.Graph](https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html#rdflib.graph.Graph) instance based on the GND result sets fetched from the API.
 
 Parameters:
 
 * **entities**: For each element in `entities` a request is sent to the GND API matching against 'variantName' (API query strings can be controlled by overriding `GNDEntityResolver._get_gnd_json` and providing an appropriate `params` parameter).
-* **predicates**: Predicates of the GND result set(s) are only transferred to the graph if present in the `predicates` argument.
+* **predicates**: Predicates of the GND result sets are only transferred to the graph if present in the `predicates` argument.
 * **limit**: Allows to control the maximum number of query result set members *per result set* that get transferred to the graph.
 
 ```python
@@ -61,7 +61,7 @@ Also allows to read entities from an XML file according to some XPath pattern.
 
 `GNDEntityResolver`'s mandatory `predicate` parameter is read from a file (JSON, text, possibly other formats (see the `_switch` parameter of `predicates_extractor` in `gndentr.helpers.extractors`)).
 
-Run `python gndentr-cli.py --help` to see available CLI options.
+> Run `python gndentr-cli.py --help` to see available CLI options.
 
 #### CLI Examples
 
