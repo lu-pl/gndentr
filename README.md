@@ -91,6 +91,11 @@ With single argument, predicates from JSON:
 ```shell
 python gndentr-cli.py "Ludwig Wittgenstein" -p ./tests/test_data/predicates.json
 ```
+With single argument, no predicates specified (i.e. all predicates from GND are transferred):
+
+```shell
+python gndentr-cli.py "Ludwig Wittgenstein"
+```
 
 With multiple arguments, predicates from JSON:
 
