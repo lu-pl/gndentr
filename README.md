@@ -80,7 +80,7 @@ A small CLI that utilizes `GNDEntityResolver`.
 
 Also allows to read entities from an XML file according to some XPath pattern.
 
-`GNDEntityResolver`'s mandatory `predicate` parameter is read from a file (JSON, text, possibly other formats (see the `_switch` parameter of `predicates_extractor` in `gndentr.helpers.extractors`)).
+`GNDEntityResolver`'s `predicate` parameter is read from a file (JSON, text, possibly other formats (see the `_switch` parameter of `predicates_extractor` in `gndentr.helpers.extractors`)). If a JSON file is provided, a single JSON object with a "predicates" key and a value of an array of predicates is expected; if a plain text file is provided, every line is assumed to denote a single predicate.
 
 > Run `python gndentr-cli.py --help` to see available CLI options.
 
