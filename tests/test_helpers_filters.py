@@ -1,6 +1,6 @@
 from collections.abc import Iterable, Callable
 
-from gndentr.helpers import filters
+from helpers import filters
 
 
 def all_of_type_p(iterable: Iterable, type: type):
